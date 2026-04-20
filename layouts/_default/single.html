@@ -1,0 +1,25 @@
+{{ define "head" }}
+<style>
+  .page-hero { background: var(--secondary); padding: 60px 0; }
+  .page-hero h1 { font-size: 36px; font-weight: 700; color: var(--primary); }
+  .page-content { padding: 64px 0; }
+  .prose { max-width: 760px; line-height: 1.8; font-size: 16px; }
+  .prose h2 { font-size: 24px; margin: 36px 0 16px; }
+  .prose p  { margin-bottom: 16px; color: #374151; }
+  .prose ul { padding-left: 24px; margin-bottom: 16px; }
+  .prose li { margin-bottom: 8px; color: #374151; }
+</style>
+{{ end }}
+
+{{ define "main" }}
+<section class="page-hero">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+  </div>
+</section>
+<section class="page-content">
+  <div class="container">
+    <div class="prose">{{ .Content }}</div>
+  </div>
+</section>
+{{ end }}
