@@ -1,7 +1,6 @@
 baseURL = "/"
 languageCode = "zh-CN"
 title = "企业官网"
-theme = ""
 
 [markup.goldmark.renderer]
 unsafe = true
