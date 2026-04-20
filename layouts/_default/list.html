@@ -1,0 +1,37 @@
+{{ define "head" }}
+<style>
+  .page-hero { background: var(--secondary); padding: 60px 0; }
+  .page-hero h1 { font-size: 36px; font-weight: 700; color: var(--primary); }
+  .news-list { padding: 64px 0; }
+  .news-item { border-bottom: 1px solid #e5e7eb; padding: 28px 0; display: flex; gap: 24px; align-items: flex-start; }
+  .news-date { color: #9ca3af; font-size: 14px; min-width: 96px; padding-top: 4px; }
+  .news-item h2 { font-size: 20px; margin-bottom: 8px; }
+  .news-item h2 a { color: #1f2937; }
+  .news-item h2 a:hover { color: var(--primary); }
+  .news-item p { color: #6b7280; line-height: 1.6; font-size: 15px; }
+  .empty { color: #9ca3af; padding: 40px 0; }
+</style>
+{{ end }}
+
+{{ define "main" }}
+<section class="page-hero">
+  <div class="container"><h1>新闻动态</h1></div>
+</section>
+<section class="news-list">
+  <div class="container">
+    {{ if .Pages }}
+      {{ range .Pages.ByDate.Reverse }}
+      <div class="news-item">
+        <div class="news-date">{{ .Date.Format "2006-01-02" }}</div>
+        <div>
+          <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          <p>{{ .Summary | truncate 120 }}</p>
+        </div>
+      </div>
+      {{ end }}
+    {{ else }}
+      <p class="empty">暂无新闻，敬请期待。</p>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
