@@ -1,0 +1,59 @@
+{{ define "head" }}
+<style>
+  .hero { background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%); color: #fff; padding: 100px 0; text-align: center; }
+  .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 20px; }
+  .hero p  { font-size: 20px; opacity: .85; margin-bottom: 36px; }
+  .btn-cta { background: #fff; color: var(--primary); padding: 14px 36px; border-radius: 8px; font-weight: 600; font-size: 16px; }
+  .btn-cta:hover { opacity: .9; }
+
+  .services { padding: 80px 0; }
+  .services h2 { text-align: center; font-size: 32px; margin-bottom: 48px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
+  .card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 32px; transition: box-shadow .2s; }
+  .card:hover { box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+  .card h3 { font-size: 20px; margin-bottom: 12px; color: var(--primary); }
+  .card p  { color: #6b7280; line-height: 1.7; }
+
+  .stats { background: var(--secondary); padding: 60px 0; }
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; text-align: center; }
+  .stat-num { font-size: 42px; font-weight: 700; color: var(--primary); }
+  .stat-label { color: #6b7280; margin-top: 4px; }
+
+  @media(max-width:640px){ .hero h1{font-size:32px;} }
+</style>
+{{ end }}
+
+{{ define "main" }}
+{{ $site := .Site.Data.site }}
+<section class="hero">
+  <div class="container">
+    <h1>{{ $site.hero.title }}</h1>
+    <p>{{ $site.hero.subtitle }}</p>
+    <a class="btn-cta" href="{{ $site.hero.cta_link }}">{{ $site.hero.cta_text }}</a>
+  </div>
+</section>
+
+<section class="services">
+  <div class="container">
+    <h2>我们的服务</h2>
+    <div class="cards">
+      {{ range $site.services }}
+      <div class="card">
+        <h3>{{ .name }}</h3>
+        <p>{{ .description }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div><div class="stat-num">{{ $site.about.team_size }}</div><div class="stat-label">团队成员</div></div>
+      <div><div class="stat-num">{{ $site.about.clients }}</div><div class="stat-label">服务客户</div></div>
+      <div><div class="stat-num">{{ $site.company.founded }}</div><div class="stat-label">成立年份</div></div>
+    </div>
+  </div>
+</section>
+{{ end }}
