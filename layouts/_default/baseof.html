@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ .Title }} - {{ .Site.Params.company_name | default "企业官网" }}</title>
+  {{ $site := .Site.Data.site }}
+  <style>
+    :root {
+      --primary: {{ $site.theme.primary_color | default "#1a56db" }};
+      --secondary: {{ $site.theme.secondary_color | default "#e1effe" }};
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #1f2937; }
+    a { color: var(--primary); text-decoration: none; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* Nav */
+    nav { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 16px 0; position: sticky; top: 0; z-index: 100; }
+    nav .inner { display: flex; align-items: center; justify-content: space-between; }
+    nav .logo { font-size: 20px; font-weight: 700; color: var(--primary); }
+    nav ul { list-style: none; display: flex; gap: 32px; }
+    nav ul a { color: #374151; font-size: 15px; }
+    nav ul a:hover { color: var(--primary); }
+
+    /* Footer */
+    footer { background: #1f2937; color: #9ca3af; padding: 40px 0; margin-top: 80px; }
+    footer .inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    footer .icp { font-size: 13px; }
+  </style>
+  {{ block "head" . }}{{ end }}
+</head>
+<body>
+  {{ $site := .Site.Data.site }}
+  <nav>
+    <div class="container inner">
+      <a class="logo" href="/">{{ $site.company.name }}</a>
+      <ul>
+        <li><a href="/">首页</a></li>
+        <li><a href="/about">关于我们</a></li>
+        <li><a href="/services">产品服务</a></li>
+        <li><a href="/news">新闻动态</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  {{ block "main" . }}{{ end }}
+
+  <footer>
+    <div class="container inner">
+      <span>© {{ now.Year }} {{ $site.company.name }}. All rights reserved.</span>
+      {{ with $site.company.icp }}<span class="icp">{{ . }}</span>{{ end }}
+      <span>{{ $site.company.email }} | {{ $site.company.phone }}</span>
+    </div>
+  </footer>
+</body>
+</html>
