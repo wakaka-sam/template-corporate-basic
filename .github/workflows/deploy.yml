@@ -29,8 +29,12 @@ jobs:
       - name: Copy site.yaml to data/
         run: mkdir -p data && cp site.yaml data/site.yaml
 
+      - name: Compute Pages base URL
+        id: pages
+        uses: actions/configure-pages@v5
+
       - name: Build
-        run: hugo --minify
+        run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
